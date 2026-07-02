@@ -7,9 +7,9 @@ export const CONTACT = {
   email: "", // sin email de contacto por ahora (si queda vacío, no se muestra)
   linkedin: "https://www.linkedin.com/in/jose-manuel-mej%C3%ADa-corredor-9bbb65349/",
 
-  // Link PÚBLICO de reserva de Cal.com (ej. https://cal.com/usuario/20min).
+  // Link PÚBLICO de reserva de Cal.com.
   // OJO: nunca pongas aquí una API key (cal_live_...); eso es un secreto y este sitio es público.
-  meetingUrl: "", // TODO: pegar el link público de Cal.com; si queda vacío, se usa WhatsApp
+  meetingUrl: "https://cal.com/solo-seriedad-tpoark",
 };
 
 // Construye la URL de WhatsApp con mensaje prellenado.
