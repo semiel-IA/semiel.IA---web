@@ -1,6 +1,6 @@
-// Enlaces de navegación (anclas a secciones de la página única)
-export const NAV_LINKS = [
-  { label: "Para negocios", href: "#para-negocios" },
-  { label: "Sobre mí", href: "#sobre-mi" },
-  { label: "Contacto", href: "#contacto" },
+// Estructura de navegación: la etiqueta se traduce vía t.nav[key] (ver i18n/translations.js).
+export const NAV_ITEMS = [
+  { key: "paraNegocios", href: "#para-negocios" },
+  { key: "sobreMi", href: "#sobre-mi" },
+  { key: "contacto", href: "#contacto" },
 ];

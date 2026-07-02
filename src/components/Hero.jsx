@@ -3,8 +3,12 @@ import { COLORS } from "../theme/colors";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
 import { meetingUrl } from "../data/contact";
+import { useLang } from "../i18n/LanguageContext";
 
 export function Hero() {
+  const { t } = useLang();
+  const h = t.hero;
+
   return (
     <section id="inicio" className="relative overflow-hidden" style={{ backgroundColor: COLORS.void }}>
       {/* Sol */}
@@ -39,41 +43,38 @@ export function Hero() {
           className="font-body text-xs sm:text-sm px-4 py-2 rounded-full mb-8"
           style={{ border: `1px solid ${COLORS.borderStrong}`, backgroundColor: "rgba(11,4,2,0.4)", color: COLORS.linenDim, backdropFilter: "blur(6px)" }}
         >
-          Automatiza tu negocio con Semiel.IA · IA
+          {h.eyebrow}
         </Reveal>
 
         {/* H1 */}
         <Reveal as="h1" delay={80} className="font-display italic font-semibold text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6 max-w-3xl" style={{ color: COLORS.linen }}>
-          Automatizo los procesos de tu empresa para que la IA trabaje por tu negocio.
+          {h.h1}
         </Reveal>
 
         {/* Subtítulo (2 párrafos) */}
         <Reveal delay={160} className="font-body text-base sm:text-lg max-w-xl mb-3 space-y-3" style={{ color: COLORS.linenDim }}>
-          <p>
-            Automatizaciones, agentes de IA, páginas web, apps y software a medida (tu propio CRM), manejo de facturación.
-          </p>
-          <p>
-            Te acompaño mensualmente dándole mantenimiento al sistema que te monté.
-          </p>
+          <p>{h.subtitle1}</p>
+          <p>{h.subtitle2}</p>
         </Reveal>
 
         {/* Botones */}
         <Reveal delay={240} className="flex flex-col sm:flex-row items-center gap-3 mt-8">
-          <Button href={meetingUrl()} variant="primary" subtext="Reunión de 20 minutos gratis" target="_blank" rel="noopener noreferrer">
-            Trabaja conmigo
+          <Button href={meetingUrl()} variant="primary" subtext={h.ctaPrimarySub} target="_blank" rel="noopener noreferrer">
+            {h.ctaPrimary}
           </Button>
           <Button href="#para-negocios" variant="secondary" icon={ArrowUpRight}>
-            Ver lo que hago
+            {h.ctaSecondary}
           </Button>
         </Reveal>
 
-        {/* Pie */}
+        {/* Pie de confianza */}
         <Reveal delay={320} className="font-body text-xs sm:text-sm mt-10 flex items-center gap-2 flex-wrap justify-center" style={{ color: COLORS.dust }}>
-          <span>Respuesta rápida</span>
-          <span style={{ color: COLORS.emberCore }}>·</span>
-          <span>Hecho a tu medida</span>
-          <span style={{ color: COLORS.emberCore }}>·</span>
-          <span>En español</span>
+          {h.trust.map((item, i) => (
+            <span key={item} className="flex items-center gap-2">
+              {i > 0 && <span style={{ color: COLORS.emberCore }}>·</span>}
+              {item}
+            </span>
+          ))}
         </Reveal>
       </div>
     </section>

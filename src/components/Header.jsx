@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { COLORS } from "../theme/colors";
-import { NAV_LINKS } from "../data/navLinks";
+import { NAV_ITEMS } from "../data/navLinks";
 import { whatsappUrl } from "../data/contact";
+import { useLang } from "../i18n/LanguageContext";
 import { NavPill } from "./NavPill";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 
@@ -17,23 +18,25 @@ function Brand() {
   );
 }
 
-function LangToggle({ lang, setLang, className = "" }) {
+function LangToggle({ className = "" }) {
+  const { lang, setLang } = useLang();
   return (
     <div
       className={`items-center rounded-full p-0.5 font-body text-xs font-medium ${className}`}
       style={{ border: `1px solid ${COLORS.border}` }}
     >
-      {["ES", "EN"].map((l) => (
+      {["es", "en"].map((l) => (
         <button
           key={l}
           onClick={() => setLang(l)}
+          aria-pressed={lang === l}
           className="px-3 py-1.5 rounded-full transition-colors duration-200"
           style={{
             backgroundColor: lang === l ? COLORS.emberCore : "transparent",
             color: lang === l ? COLORS.void : COLORS.linenDim,
           }}
         >
-          {l}
+          {l.toUpperCase()}
         </button>
       ))}
     </div>
@@ -41,10 +44,10 @@ function LangToggle({ lang, setLang, className = "" }) {
 }
 
 // CTA de WhatsApp (verde suave) reutilizado en desktop y móvil.
-function WhatsAppCta({ className = "" }) {
+function WhatsAppCta({ message, className = "" }) {
   return (
     <a
-      href={whatsappUrl()}
+      href={whatsappUrl(message)}
       target="_blank"
       rel="noopener noreferrer"
       className={`items-center gap-2 rounded-full px-4 py-2.5 font-body text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5 ${className}`}
@@ -60,7 +63,7 @@ function WhatsAppCta({ className = "" }) {
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [lang, setLang] = useState("ES");
+  const { t } = useLang();
 
   return (
     <header className="sticky top-0 z-50" style={{ backgroundColor: "rgba(11,4,2,0.72)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderBottom: `1px solid ${COLORS.border}` }}>
@@ -72,22 +75,22 @@ export function Header() {
           className="hidden lg:flex items-center gap-1 rounded-full px-2 py-1.5"
           style={{ border: `1px solid ${COLORS.border}`, backgroundColor: "rgba(246,236,224,0.02)" }}
         >
-          {NAV_LINKS.map((l) => (
-            <NavPill key={l.label} href={l.href}>{l.label}</NavPill>
+          {NAV_ITEMS.map((item) => (
+            <NavPill key={item.key} href={item.href}>{t.nav[item.key]}</NavPill>
           ))}
         </nav>
 
         {/* Controles derecha */}
         <div className="flex items-center gap-2 md:gap-3">
-          <LangToggle lang={lang} setLang={setLang} className="hidden sm:flex" />
-          <WhatsAppCta className="hidden sm:flex" />
+          <LangToggle className="hidden sm:flex" />
+          <WhatsAppCta message={t.whatsapp.default} className="hidden sm:flex" />
 
           {/* Botón menú móvil */}
           <button
             className="lg:hidden p-2 rounded-full"
             style={{ border: `1px solid ${COLORS.border}` }}
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Abrir menú"
+            aria-label={t.common.openMenu}
           >
             {menuOpen ? <X size={18} color={COLORS.linen} /> : <Menu size={18} color={COLORS.linen} />}
           </button>
@@ -97,20 +100,20 @@ export function Header() {
       {/* Menú móvil */}
       {menuOpen && (
         <div className="lg:hidden px-5 pb-6 flex flex-col gap-1" style={{ borderTop: `1px solid ${COLORS.border}` }}>
-          {NAV_LINKS.map((l) => (
+          {NAV_ITEMS.map((item) => (
             <a
-              key={l.label}
-              href={l.href}
+              key={item.key}
+              href={item.href}
               onClick={() => setMenuOpen(false)}
               className="font-body text-sm py-3"
               style={{ color: COLORS.linenDim, borderBottom: `1px solid ${COLORS.border}` }}
             >
-              {l.label}
+              {t.nav[item.key]}
             </a>
           ))}
           <div className="flex items-center justify-between mt-4">
-            <LangToggle lang={lang} setLang={setLang} className="flex" />
-            <WhatsAppCta className="flex" />
+            <LangToggle className="flex" />
+            <WhatsAppCta message={t.whatsapp.default} className="flex" />
           </div>
         </div>
       )}

@@ -42,17 +42,19 @@ Portfolio/
 ├─ tailwind.config.js
 ├─ postcss.config.js
 ├─ src/
-│  ├─ main.jsx              # bootstrap de React
+│  ├─ main.jsx              # bootstrap de React, envuelve <App/> en <LanguageProvider>
 │  ├─ App.jsx                # compone Header + Hero + ParaNegocios + About + Contact + Footer
 │  ├─ index.css              # fuentes, @tailwind directives, keyframes (solarPulse, revealUp)
+│  ├─ i18n/
+│  │  ├─ translations.js      # diccionario ES/EN — ÚNICA fuente del copy visible
+│  │  └─ LanguageContext.jsx  # LanguageProvider + hook useLang() (persiste en localStorage)
 │  ├─ theme/
 │  │  └─ colors.js           # paleta COLORS (única fuente de verdad de color)
 │  ├─ data/
-│  │  ├─ navLinks.js         # enlaces de navegación (anclas)
-│  │  ├─ contact.js          # ÚNICA fuente de datos de contacto + helpers whatsappUrl()/meetingUrl()
-│  │  └─ paraNegocios.js     # contenido de las 4 tarjetas de "Para negocios"
+│  │  ├─ navLinks.js         # NAV_ITEMS: estructura (key + href); la etiqueta la da t.nav[key]
+│  │  └─ contact.js          # ÚNICA fuente de datos de contacto + helpers whatsappUrl()/meetingUrl()
 │  └─ components/
-│     ├─ Header.jsx          # nav fija + menú móvil + selector ES/EN (visual) + CTA WhatsApp
+│     ├─ Header.jsx          # nav fija + menú móvil + selector ES/EN (funcional) + CTA WhatsApp
 │     ├─ Hero.jsx             # sol animado, eyebrow, H1, subtítulo, 2 CTA, pie
 │     ├─ ParaNegociosSection.jsx  # id=para-negocios, grid 2×2 de tarjetas + CTA de cierre
 │     ├─ AboutSection.jsx     # id=sobre-mi (copy BORRADOR, pendiente de refinar)
@@ -68,7 +70,8 @@ Portfolio/
 ```
 
 Reglas:
-- Componentes pequeños y con una responsabilidad clara; el contenido (nav, tarjetas, contacto) va en `src/data/`, no hardcodeado en el JSX.
+- Componentes pequeños y con una responsabilidad clara; **todo el copy visible vive en `src/i18n/translations.js`** (ES/EN), no hardcodeado en el JSX. Los componentes lo leen con `const { t } = useLang()`.
+- Los datos no traducibles (hrefs de nav, contacto) van en `src/data/`.
 - Toda referencia de color pasa por `COLORS` en `src/theme/colors.js` — no colores sueltos.
 - Los CTA de contacto usan `src/data/contact.js` (helpers `whatsappUrl()` / `meetingUrl()`), nunca URLs sueltas.
 - Animaciones sutiles con el componente `Reveal` (CSS + IntersectionObserver). **No** usamos framer-motion (decisión: mantenerlo ligero).
@@ -137,34 +140,38 @@ El header enlaza a estas secciones (`src/data/navLinks.js`):
 |-------|---------|--------|
 | `#inicio` | **Hero** | Implementada (`Hero.jsx`) |
 | `#para-negocios` | **Para negocios** (4 servicios) | Implementada (`ParaNegociosSection.jsx`) |
-| `#sobre-mi` | **Sobre mí** | Implementada con copy **borrador** (`AboutSection.jsx`) |
-| `#contacto` | **Contacto** | Implementada; datos de contacto con **placeholders** (`src/data/contact.js`) |
+| `#sobre-mi` | **Sobre mí** | Implementada (`AboutSection.jsx`) |
+| `#contacto` | **Contacto** | Implementada, con datos reales (`ContactSection.jsx` + `src/data/contact.js`) |
 
 > El nav muestra solo 3 enlaces (Para negocios · Sobre mí · Contacto), según el brief actual.
 
 ### Pendientes conocidos
-- Sustituir placeholders de contacto (WhatsApp, email, LinkedIn, link de agenda) en `src/data/contact.js`.
-- Refinar el copy borrador de **Sobre mí** (el brief no lo incluía).
-- i18n real ES/EN (hoy el selector es solo visual).
+- El botón "Reunión de 20 min" usa el link público de Cal.com (`meetingUrl` en `contact.js`);
+  el email sigue sin definir (el enlace se oculta si `CONTACT.email` está vacío).
 
 ---
 
 ## 5. Idioma / i18n
 
-- **Selector de idioma ES / EN** en la barra superior (`Header.jsx`, componente `LangToggle`).
-- Estado actual: el toggle cambia visualmente pero **aún no traduce contenido** — falta
-  integrar la traducción real.
-- Plan pendiente: integrar **Google Translate** con soporte para DE, FR, EN, IT, PT-BR.
-- Idioma por defecto al cargar: **español**.
-- Todo el copy visible se escribe en español (con soporte de traducción encima).
+- **i18n propio y ligero (sin dependencias).** El copy vive en `src/i18n/translations.js`
+  como `{ es: {...}, en: {...} }`.
+- El estado de idioma lo maneja `LanguageProvider` (`src/i18n/LanguageContext.jsx`):
+  - Persiste la elección en `localStorage` (clave `semiel-lang`).
+  - Actualiza `document.documentElement.lang`.
+  - **Idioma por defecto: español.**
+- Los componentes leen textos con `const { t } = useLang()` y cambian idioma con `setLang("es"|"en")`.
+- **Cómo añadir/editar copy:** edita ambos idiomas en `translations.js`. Si agregas una clave,
+  ponla en `es` **y** `en` para no dejar textos sin traducir.
+- Fuera de alcance por ahora: DE, FR, IT, PT-BR (se evaluaría Google Translate si se piden;
+  hoy solo ES/EN con traducción manual de calidad).
 
 ---
 
 ## 6. Convenciones de trabajo
 
-- Copy en español; la traducción se resuelve con el selector de idioma.
-- Componentes en `src/components/`, datos en `src/data/`, color en `src/theme/colors.js` —
-  no dupliques estos valores dentro de un componente.
+- Copy bilingüe en `src/i18n/translations.js` (ES + EN); nunca hardcodees texto en el JSX.
+- Componentes en `src/components/`, textos en `src/i18n/`, datos en `src/data/`, color en
+  `src/theme/colors.js` — no dupliques estos valores dentro de un componente.
 - Priorizar rendimiento y accesibilidad (semántica, `alt`, contraste, responsive móvil primero).
 - Mantener la coherencia con la paleta y la tipografía definidas arriba.
 - Cada cambio funcional se commitea y se sube a GitHub

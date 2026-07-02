@@ -1,9 +1,12 @@
 import { COLORS } from "../theme/colors";
-import { NAV_LINKS } from "../data/navLinks";
+import { NAV_ITEMS } from "../data/navLinks";
 import { whatsappUrl } from "../data/contact";
+import { useLang } from "../i18n/LanguageContext";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 
 export function Footer() {
+  const { t } = useLang();
+
   return (
     <footer className="relative z-10" style={{ borderTop: `1px solid ${COLORS.border}`, backgroundColor: COLORS.void }}>
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -14,31 +17,31 @@ export function Footer() {
             Semiel<span style={{ color: COLORS.emberCore }}>.IA</span>
           </span>
           <span className="font-body text-xs" style={{ color: COLORS.dust }}>
-            Automatización e IA · Medellín, Colombia
+            {t.footer.tagline}
           </span>
         </div>
 
         <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          {NAV_LINKS.map((l) => (
-            <a key={l.label} href={l.href} className="font-body text-xs" style={{ color: COLORS.linenDim }}>
-              {l.label}
+          {NAV_ITEMS.map((item) => (
+            <a key={item.key} href={item.href} className="font-body text-xs" style={{ color: COLORS.linenDim }}>
+              {t.nav[item.key]}
             </a>
           ))}
         </nav>
 
         <a
-          href={whatsappUrl()}
+          href={whatsappUrl(t.whatsapp.default)}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 rounded-full px-4 py-2 font-body text-xs font-semibold"
           style={{ backgroundColor: COLORS.whatsapp, color: COLORS.void }}
         >
           <WhatsAppIcon size={14} />
-          Escríbeme
+          {t.footer.whatsappCta}
         </a>
       </div>
       <div className="text-center pb-8 font-body text-[11px]" style={{ color: COLORS.dust }}>
-        © 2026 Jose Mejía · Semiel.IA · Hecho con IA en español.
+        {t.footer.copyright}
       </div>
     </footer>
   );
