@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Original de la foto de perfil (ya optimizada en src/assets/jose-mejia.webp)
+/perfil.jpeg
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
