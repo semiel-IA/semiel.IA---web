@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Secretos / variables de entorno — NUNCA subir claves de API o tokens al repo
+.env
+.env.*
+!.env.example
+
 # Original de la foto de perfil (ya optimizada en src/assets/jose-mejia.webp)
 /perfil.jpeg
 

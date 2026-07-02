@@ -2,6 +2,13 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- Seguridad: la meta Content-Security-Policy se inyecta SOLO en el build de
+         producción (ver cspPlugin en vite.config.js), para no romper el HMR de Vite
+         en desarrollo. En hostings con cabeceras (Netlify/Cloudflare) manda public/_headers. -->
+    <!-- No enviar la URL completa como Referer a sitios externos -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Automatizo los procesos de tu empresa para que la IA trabaje por tu negocio: automatizaciones, agentes de IA, chatbots, webs, apps y software a medida. En español." />

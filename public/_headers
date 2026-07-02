@@ -1,0 +1,19 @@
+# Cabeceras de seguridad HTTP.
+# Vite copia este archivo tal cual a la raíz del build (dist/_headers).
+# Lo aplican hostings estáticos como Netlify y Cloudflare Pages.
+# (En Vercel/GitHub Pages este archivo se ignora; la CSP y el referrer del
+#  index.html siguen protegiendo el sitio. Para Vercel se puede añadir vercel.json.)
+
+/*
+  # Evita que el sitio se incruste en un <iframe> ajeno (clickjacking)
+  X-Frame-Options: DENY
+  # El navegador no "adivina" tipos MIME (evita ejecutar recursos disfrazados)
+  X-Content-Type-Options: nosniff
+  # No filtrar la URL completa hacia sitios externos
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Fuerza HTTPS durante 2 años (incluye subdominios)
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  # Deshabilita APIs sensibles del navegador que este sitio no usa
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  # Misma CSP del index.html, pero aquí sí se aplica frame-ancestors (anti-clickjacking)
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
