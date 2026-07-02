@@ -36,16 +36,18 @@ export function ContactSection() {
 
         {/* Otros canales */}
         <div className="flex items-center gap-6 mt-8 font-body text-sm">
-          <a
-            href={`mailto:${CONTACT.email}`}
-            className="flex items-center gap-2 transition-colors duration-200"
-            style={{ color: COLORS.linenDim }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = COLORS.linen; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = COLORS.linenDim; }}
-          >
-            <Mail size={16} />
-            Email
-          </a>
+          {CONTACT.email && (
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="flex items-center gap-2 transition-colors duration-200"
+              style={{ color: COLORS.linenDim }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = COLORS.linen; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = COLORS.linenDim; }}
+            >
+              <Mail size={16} />
+              Email
+            </a>
+          )}
           <a
             href={CONTACT.linkedin}
             target="_blank"
