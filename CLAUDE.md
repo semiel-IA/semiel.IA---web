@@ -43,29 +43,39 @@ Portfolio/
 ├─ postcss.config.js
 ├─ src/
 │  ├─ main.jsx              # bootstrap de React
-│  ├─ App.jsx                # compone Header + Hero + Services + Footer
-│  ├─ index.css              # fuentes, @tailwind directives, keyframes
+│  ├─ App.jsx                # compone Header + Hero + ParaNegocios + About + Contact + Footer
+│  ├─ index.css              # fuentes, @tailwind directives, keyframes (solarPulse, revealUp)
 │  ├─ theme/
 │  │  └─ colors.js           # paleta COLORS (única fuente de verdad de color)
 │  ├─ data/
 │  │  ├─ navLinks.js         # enlaces de navegación (anclas)
-│  │  └─ services.js         # tarjetas de servicios
+│  │  ├─ contact.js          # ÚNICA fuente de datos de contacto + helpers whatsappUrl()/meetingUrl()
+│  │  └─ paraNegocios.js     # contenido de las 4 tarjetas de "Para negocios"
 │  └─ components/
-│     ├─ Header.jsx          # nav fija + menú móvil + selector ES/EN
-│     ├─ Hero.jsx             # sol animado, tagline, H1, CTA
-│     ├─ Services.jsx         # grid de servicios
+│     ├─ Header.jsx          # nav fija + menú móvil + selector ES/EN (visual) + CTA WhatsApp
+│     ├─ Hero.jsx             # sol animado, eyebrow, H1, subtítulo, 2 CTA, pie
+│     ├─ ParaNegociosSection.jsx  # id=para-negocios, grid 2×2 de tarjetas + CTA de cierre
+│     ├─ AboutSection.jsx     # id=sobre-mi (copy BORRADOR, pendiente de refinar)
+│     ├─ ContactSection.jsx   # id=contacto (WhatsApp + email + LinkedIn)
 │     ├─ Footer.jsx
 │     ├─ Grain.jsx            # textura de grano SVG sobre toda la página
+│     ├─ Button.jsx           # botón <a> con variantes primary/secondary/whatsapp
+│     ├─ Reveal.jsx           # fade/slide-up al hacer scroll (IntersectionObserver + CSS)
 │     ├─ NavPill.jsx
-│     └─ icons/WhatsAppIcon.jsx
+│     └─ icons/{WhatsAppIcon,LinkedInIcon}.jsx
 ├─ public/                   # estáticos servidos tal cual (favicon)
 └─ temaportfolio.jpg          # imagen de referencia de estética (no se sirve en la app)
 ```
 
 Reglas:
-- Componentes pequeños y con una responsabilidad clara; datos (nav, servicios) van en `src/data/`, no hardcodeados en el JSX.
+- Componentes pequeños y con una responsabilidad clara; el contenido (nav, tarjetas, contacto) va en `src/data/`, no hardcodeado en el JSX.
 - Toda referencia de color pasa por `COLORS` en `src/theme/colors.js` — no colores sueltos.
+- Los CTA de contacto usan `src/data/contact.js` (helpers `whatsappUrl()` / `meetingUrl()`), nunca URLs sueltas.
+- Animaciones sutiles con el componente `Reveal` (CSS + IntersectionObserver). **No** usamos framer-motion (decisión: mantenerlo ligero).
 - Código simple y comentado **en español** cuando el comentario aporte algo no obvio.
+
+> **Nota lucide-react:** esta versión (1.x) eliminó los iconos de marca (p. ej. LinkedIn).
+> Para logos de marca usamos SVG inline propios en `src/components/icons/`.
 
 ### Comandos
 ```
@@ -120,18 +130,22 @@ resplandor de horizonte, textura de grano sutil.
 
 ## 4. Secciones de la página (anclas)
 
+Orden en la página: **Hero → Para negocios → Sobre mí → Contacto → Footer**.
 El header enlaza a estas secciones (`src/data/navLinks.js`):
 
 | Ancla | Sección | Estado |
 |-------|---------|--------|
-| `#servicios` | **Servicios** | Implementada (`Services.jsx`) |
-| `#aprende` | **Aprende** (contenido educativo) | Pendiente de construir |
-| `#mentorias` | **Mentorías 1a1** | Pendiente de construir |
-| `#sobre-mi` | **Sobre mí** | Pendiente de construir |
-| `#contacto` | **Contacto** | Pendiente de construir (hoy el CTA apunta a WhatsApp directo) |
+| `#inicio` | **Hero** | Implementada (`Hero.jsx`) |
+| `#para-negocios` | **Para negocios** (4 servicios) | Implementada (`ParaNegociosSection.jsx`) |
+| `#sobre-mi` | **Sobre mí** | Implementada con copy **borrador** (`AboutSection.jsx`) |
+| `#contacto` | **Contacto** | Implementada; datos de contacto con **placeholders** (`src/data/contact.js`) |
 
-> Estas anclas reemplazan el set original (`#casos`, `#proceso`) — reflejan el rumbo real
-> del producto: contenido/mentorías además de servicios de automatización.
+> El nav muestra solo 3 enlaces (Para negocios · Sobre mí · Contacto), según el brief actual.
+
+### Pendientes conocidos
+- Sustituir placeholders de contacto (WhatsApp, email, LinkedIn, link de agenda) en `src/data/contact.js`.
+- Refinar el copy borrador de **Sobre mí** (el brief no lo incluía).
+- i18n real ES/EN (hoy el selector es solo visual).
 
 ---
 

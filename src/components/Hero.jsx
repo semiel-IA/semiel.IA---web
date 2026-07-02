@@ -1,9 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
 import { COLORS } from "../theme/colors";
+import { Button } from "./Button";
+import { Reveal } from "./Reveal";
+import { meetingUrl } from "../data/contact";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: COLORS.void }}>
+    <section id="inicio" className="relative overflow-hidden" style={{ backgroundColor: COLORS.void }}>
       {/* Sol */}
       <div
         className="solar-pulse absolute left-1/2 -translate-x-1/2 rounded-full"
@@ -31,41 +34,47 @@ export function Hero() {
       />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 pt-40 sm:pt-48 pb-28 sm:pb-36 flex flex-col items-center text-center">
-        {/* Pastilla de tagline */}
-        <div
+        {/* Eyebrow chip */}
+        <Reveal
           className="font-body text-xs sm:text-sm px-4 py-2 rounded-full mb-8"
           style={{ border: `1px solid ${COLORS.borderStrong}`, backgroundColor: "rgba(11,4,2,0.4)", color: COLORS.linenDim, backdropFilter: "blur(6px)" }}
         >
-          +86 negocios ya automatizan con Semiel · IA en español
-        </div>
+          Automatiza tu negocio con Semiel.IA · IA
+        </Reveal>
 
         {/* H1 */}
-        <h1 className="font-display italic font-semibold text-4xl sm:text-6xl md:text-7xl leading-[1.05] mb-6" style={{ color: COLORS.linen }}>
-          Sistemas Automatizados<br className="hidden sm:block" /> a tu Medida
-        </h1>
+        <Reveal as="h1" delay={80} className="font-display italic font-semibold text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6 max-w-3xl" style={{ color: COLORS.linen }}>
+          Automatizo los procesos de tu empresa para que la IA trabaje por tu negocio.
+        </Reveal>
 
-        {/* Subhead */}
-        <p className="font-body text-base sm:text-lg max-w-xl mb-10" style={{ color: COLORS.linenDim }}>
-          ¿Pierdes horas en tareas manuales o sientes que se te escapan clientes? Construyo o automatizo lo que tu negocio necesita para escalar.
-        </p>
+        {/* Subtítulo (2 párrafos) */}
+        <Reveal delay={160} className="font-body text-base sm:text-lg max-w-xl mb-3 space-y-3" style={{ color: COLORS.linenDim }}>
+          <p>
+            Automatizaciones, agentes de IA, páginas web, apps y software a medida (tu propio CRM), manejo de facturación.
+          </p>
+          <p>
+            Te acompaño mensualmente dándole mantenimiento al sistema que te monté.
+          </p>
+        </Reveal>
 
-        {/* CTA */}
-        <a
-          href="#contacto"
-          className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-body text-sm sm:text-base font-semibold transition-transform duration-200 hover:-translate-y-0.5"
-          style={{ backgroundColor: COLORS.emberCore, color: COLORS.void }}
-        >
-          Cuéntame tu reto
-          <ArrowUpRight size={18} />
-        </a>
+        {/* Botones */}
+        <Reveal delay={240} className="flex flex-col sm:flex-row items-center gap-3 mt-8">
+          <Button href={meetingUrl()} variant="primary" subtext="Reunión de 20 minutos gratis" target="_blank" rel="noopener noreferrer">
+            Trabaja conmigo
+          </Button>
+          <Button href="#para-negocios" variant="secondary" icon={ArrowUpRight}>
+            Ver lo que hago
+          </Button>
+        </Reveal>
 
-        {/* Silueta diminuta, eco de la figura en la imagen de referencia */}
-        <div className="mt-16 sm:mt-20" aria-hidden="true">
-          <svg width="14" height="30" viewBox="0 0 14 30" style={{ opacity: 0.55 }}>
-            <circle cx="7" cy="4" r="3.4" fill={COLORS.void} stroke={COLORS.solarGold} strokeWidth="0.6" />
-            <path d="M7 8 L7 20 M7 12 L2 16 M7 12 L12 16 M7 20 L3 29 M7 20 L11 29" stroke={COLORS.solarGold} strokeWidth="1.1" strokeLinecap="round" fill="none" />
-          </svg>
-        </div>
+        {/* Pie */}
+        <Reveal delay={320} className="font-body text-xs sm:text-sm mt-10 flex items-center gap-2 flex-wrap justify-center" style={{ color: COLORS.dust }}>
+          <span>Respuesta rápida</span>
+          <span style={{ color: COLORS.emberCore }}>·</span>
+          <span>Hecho a tu medida</span>
+          <span style={{ color: COLORS.emberCore }}>·</span>
+          <span>En español</span>
+        </Reveal>
       </div>
     </section>
   );

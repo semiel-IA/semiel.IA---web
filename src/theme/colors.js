@@ -14,4 +14,7 @@ export const COLORS = {
   borderStrong: "rgba(246,236,224,0.22)",
   cardBg: "rgba(246,236,224,0.03)",
   cardBgHover: "rgba(246,236,224,0.055)",
+  // Verde suave para los CTA de WhatsApp (armoniza con la paleta cálida)
+  whatsapp: "#3aa66b",
+  whatsappHover: "#45bd7b",
 };

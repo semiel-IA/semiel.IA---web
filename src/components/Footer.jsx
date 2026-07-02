@@ -1,5 +1,6 @@
 import { COLORS } from "../theme/colors";
 import { NAV_LINKS } from "../data/navLinks";
+import { whatsappUrl } from "../data/contact";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 
 export function Footer() {
@@ -8,10 +9,12 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex flex-col items-center md:items-start gap-1">
           <span className="font-display italic font-semibold text-lg" style={{ color: COLORS.linen }}>
+            Jose Mej<span style={{ color: COLORS.emberCore }}>IA</span>
+            <span style={{ color: COLORS.dust }}> ~ </span>
             Semiel<span style={{ color: COLORS.emberCore }}>.IA</span>
           </span>
           <span className="font-body text-xs" style={{ color: COLORS.dust }}>
-            José Mejía · Automatización e IA · Medellín, Colombia
+            Automatización e IA · Medellín, Colombia
           </span>
         </div>
 
@@ -24,16 +27,18 @@ export function Footer() {
         </nav>
 
         <a
-          href="https://wa.me/message"
+          href={whatsappUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex items-center gap-2 rounded-full px-4 py-2 font-body text-xs font-semibold"
-          style={{ backgroundColor: COLORS.emberCore, color: COLORS.void }}
+          style={{ backgroundColor: COLORS.whatsapp, color: COLORS.void }}
         >
           <WhatsAppIcon size={14} />
           Escríbeme
         </a>
       </div>
       <div className="text-center pb-8 font-body text-[11px]" style={{ color: COLORS.dust }}>
-        © 2026 Semiel.IA. Todos los derechos reservados.
+        © 2026 Jose Mejía · Semiel.IA · Hecho con IA en español.
       </div>
     </footer>
   );

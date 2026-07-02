@@ -2,7 +2,9 @@ import { COLORS } from "./theme/colors";
 import { Grain } from "./components/Grain";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { Services } from "./components/Services";
+import { ParaNegociosSection } from "./components/ParaNegociosSection";
+import { AboutSection } from "./components/AboutSection";
+import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 
 export default function App() {
@@ -12,8 +14,12 @@ export default function App() {
       <div className="fixed inset-0 z-0"><Grain /></div>
 
       <Header />
-      <Hero />
-      <Services />
+      <main>
+        <Hero />
+        <ParaNegociosSection />
+        <AboutSection />
+        <ContactSection />
+      </main>
       <Footer />
     </div>
   );

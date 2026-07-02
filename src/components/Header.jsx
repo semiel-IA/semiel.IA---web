@@ -2,8 +2,20 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { COLORS } from "../theme/colors";
 import { NAV_LINKS } from "../data/navLinks";
+import { whatsappUrl } from "../data/contact";
 import { NavPill } from "./NavPill";
 import { WhatsAppIcon } from "./icons/WhatsAppIcon";
+
+// Marca: "Jose MejIA ~ Semiel.IA" — se resalta "IA" en ambos nombres.
+function Brand() {
+  return (
+    <a href="#" className="font-display italic font-semibold text-lg md:text-xl shrink-0" style={{ color: COLORS.linen }}>
+      Jose Mej<span style={{ color: COLORS.emberCore }}>IA</span>
+      <span style={{ color: COLORS.dust }}> ~ </span>
+      Semiel<span style={{ color: COLORS.emberCore }}>.IA</span>
+    </a>
+  );
+}
 
 function LangToggle({ lang, setLang, className = "" }) {
   return (
@@ -28,24 +40,34 @@ function LangToggle({ lang, setLang, className = "" }) {
   );
 }
 
+// CTA de WhatsApp (verde suave) reutilizado en desktop y móvil.
+function WhatsAppCta({ className = "" }) {
+  return (
+    <a
+      href={whatsappUrl()}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`items-center gap-2 rounded-full px-4 py-2.5 font-body text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5 ${className}`}
+      style={{ backgroundColor: COLORS.whatsapp, color: COLORS.void }}
+      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = COLORS.whatsappHover; }}
+      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = COLORS.whatsapp; }}
+    >
+      <WhatsAppIcon size={16} />
+      WhatsApp
+    </a>
+  );
+}
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState("ES");
 
   return (
     <header className="sticky top-0 z-50" style={{ backgroundColor: "rgba(11,4,2,0.72)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderBottom: `1px solid ${COLORS.border}` }}>
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 md:h-20 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex flex-col leading-none shrink-0">
-          <span className="font-display italic font-semibold text-xl md:text-2xl" style={{ color: COLORS.linen }}>
-            Semiel<span style={{ color: COLORS.emberCore }}>.IA</span>
-          </span>
-          <span className="hidden sm:block font-body text-[10px] uppercase tracking-[0.18em] mt-0.5" style={{ color: COLORS.dust }}>
-            por José Mejía
-          </span>
-        </a>
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 md:h-20 flex items-center justify-between gap-4">
+        <Brand />
 
-        {/* Center nav (desktop) */}
+        {/* Nav centro (desktop) */}
         <nav
           className="hidden lg:flex items-center gap-1 rounded-full px-2 py-1.5"
           style={{ border: `1px solid ${COLORS.border}`, backgroundColor: "rgba(246,236,224,0.02)" }}
@@ -55,21 +77,12 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Right controls */}
+        {/* Controles derecha */}
         <div className="flex items-center gap-2 md:gap-3">
           <LangToggle lang={lang} setLang={setLang} className="hidden sm:flex" />
+          <WhatsAppCta className="hidden sm:flex" />
 
-          {/* WhatsApp CTA */}
-          <a
-            href="https://wa.me/message"
-            className="hidden sm:flex items-center gap-2 rounded-full px-4 py-2.5 font-body text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5"
-            style={{ backgroundColor: COLORS.emberCore, color: COLORS.void }}
-          >
-            <WhatsAppIcon size={16} />
-            WhatsApp
-          </a>
-
-          {/* Mobile menu toggle */}
+          {/* Botón menú móvil */}
           <button
             className="lg:hidden p-2 rounded-full"
             style={{ border: `1px solid ${COLORS.border}` }}
@@ -81,7 +94,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Menú móvil */}
       {menuOpen && (
         <div className="lg:hidden px-5 pb-6 flex flex-col gap-1" style={{ borderTop: `1px solid ${COLORS.border}` }}>
           {NAV_LINKS.map((l) => (
@@ -97,14 +110,7 @@ export function Header() {
           ))}
           <div className="flex items-center justify-between mt-4">
             <LangToggle lang={lang} setLang={setLang} className="flex" />
-            <a
-              href="https://wa.me/message"
-              className="flex items-center gap-2 rounded-full px-4 py-2.5 font-body text-sm font-semibold"
-              style={{ backgroundColor: COLORS.emberCore, color: COLORS.void }}
-            >
-              <WhatsAppIcon size={16} />
-              WhatsApp
-            </a>
+            <WhatsAppCta className="flex" />
           </div>
         </div>
       )}
