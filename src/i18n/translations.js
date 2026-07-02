@@ -96,6 +96,9 @@ export const TRANSLATIONS = {
       whatsappCta: "Escríbeme por WhatsApp",
       email: "Email",
       linkedin: "LinkedIn",
+      socialTitle: "Conoce más de mi contenido",
+      instagram: "Instagram",
+      tiktok: "TikTok",
     },
 
     footer: {
@@ -200,6 +203,9 @@ export const TRANSLATIONS = {
       whatsappCta: "Message me on WhatsApp",
       email: "Email",
       linkedin: "LinkedIn",
+      socialTitle: "See more of my content",
+      instagram: "Instagram",
+      tiktok: "TikTok",
     },
 
     footer: {

@@ -7,6 +7,10 @@ export const CONTACT = {
   email: "", // sin email de contacto por ahora (si queda vacío, no se muestra)
   linkedin: "https://www.linkedin.com/in/jose-manuel-mej%C3%ADa-corredor-9bbb65349/",
 
+  // Redes sociales de contenido (cada una se muestra solo si tiene URL).
+  instagram: "https://www.instagram.com/semiel.ia/",
+  tiktok: "https://www.tiktok.com/@semiel.ia",
+
   // Link PÚBLICO de reserva de Cal.com.
   // OJO: nunca pongas aquí una API key (cal_live_...); eso es un secreto y este sitio es público.
   meetingUrl: "https://cal.com/solo-seriedad-tpoark",
