@@ -76,6 +76,10 @@ export const TRANSLATIONS = {
       closing: "¿Lo que necesitas no está en la lista? Revisemos si se puede automatizar o construir y lo hago por ti.",
       cta: "Hablemos y cuéntame qué necesitas",
       ctaSub: "Respuesta rápida · sin compromiso",
+      meetingTitle: "Agenda una reunión conmigo",
+      meetingText: "Reserva un espacio en mi calendario y hablamos de tu proyecto.",
+      meetingCta: "Agendar reunión",
+      meetingSub: "20 minutos · gratis",
     },
 
     about: {
@@ -183,6 +187,10 @@ export const TRANSLATIONS = {
       closing: "What you need isn't on the list? Let's see if it can be automated or built — and I'll do it for you.",
       cta: "Let's talk — tell me what you need",
       ctaSub: "Fast reply · no commitment",
+      meetingTitle: "Book a call with me",
+      meetingText: "Grab a slot on my calendar and we'll talk about your project.",
+      meetingCta: "Book a call",
+      meetingSub: "20 minutes · free",
     },
 
     about: {

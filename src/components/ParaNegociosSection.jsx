@@ -1,5 +1,5 @@
 import { COLORS } from "../theme/colors";
-import { whatsappUrl } from "../data/contact";
+import { whatsappUrl, meetingUrl } from "../data/contact";
 import { useLang } from "../i18n/LanguageContext";
 import { Reveal } from "./Reveal";
 import { Button } from "./Button";
@@ -78,22 +78,51 @@ export function ParaNegociosSection() {
           ))}
         </div>
 
-        {/* Cierre + CTA de WhatsApp */}
-        <Reveal delay={120} className="mt-16 text-center max-w-2xl mx-auto flex flex-col items-center">
-          <p className="font-body text-base sm:text-lg mb-6" style={{ color: COLORS.linenDim }}>
-            {p.closing}
-          </p>
-          <Button
-            href={whatsappUrl(t.whatsapp.paraNegocios)}
-            variant="whatsapp"
-            size="lg"
-            icon={WhatsAppIcon}
-            subtext={p.ctaSub}
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Cierre: dos CTA lado a lado (WhatsApp · agendar reunión) */}
+        <Reveal delay={120} className="mt-16 grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+          {/* Izquierda: ¿algo que no está en la lista? → WhatsApp */}
+          <div
+            className="rounded-3xl p-8 flex flex-col items-center text-center"
+            style={{ backgroundColor: COLORS.cardBg, border: `1px solid ${COLORS.border}` }}
           >
-            {p.cta}
-          </Button>
+            <p className="font-body text-base sm:text-lg mb-6 flex-1" style={{ color: COLORS.linenDim }}>
+              {p.closing}
+            </p>
+            <Button
+              href={whatsappUrl(t.whatsapp.paraNegocios)}
+              variant="whatsapp"
+              size="lg"
+              icon={WhatsAppIcon}
+              subtext={p.ctaSub}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {p.cta}
+            </Button>
+          </div>
+
+          {/* Derecha: agenda una reunión → calendario (Cal.com) */}
+          <div
+            className="rounded-3xl p-8 flex flex-col items-center text-center"
+            style={{ backgroundColor: COLORS.cardBg, border: `1px solid ${COLORS.border}` }}
+          >
+            <h3 className="font-display italic font-semibold text-xl sm:text-2xl mb-3" style={{ color: COLORS.linen }}>
+              {p.meetingTitle}
+            </h3>
+            <p className="font-body text-base sm:text-lg mb-6 flex-1" style={{ color: COLORS.linenDim }}>
+              {p.meetingText}
+            </p>
+            <Button
+              href={meetingUrl()}
+              variant="primary"
+              size="lg"
+              subtext={p.meetingSub}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {p.meetingCta}
+            </Button>
+          </div>
         </Reveal>
       </div>
     </section>
