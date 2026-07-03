@@ -23,7 +23,7 @@ export const TRANSLATIONS = {
       ctaPrimary: "Trabaja conmigo",
       ctaPrimarySub: "Reunión de 20 minutos gratis",
       ctaSecondary: "Ver lo que hago",
-      trust: ["Respuesta rápida", "Hecho a tu medida", "En español"],
+      trust: ["Respuesta rápida", "Hecho a tu medida", "En español y en inglés"],
     },
 
     paraNegocios: {
@@ -104,7 +104,7 @@ export const TRANSLATIONS = {
     footer: {
       tagline: "Automatización e IA · Medellín, Colombia",
       whatsappCta: "Escríbeme",
-      copyright: "© 2026 Jose Mejía · Semiel.IA · Hecho con IA en español.",
+      copyright: "© 2026 Jose Mejía · Semiel.IA ·",
     },
   },
 
@@ -211,7 +211,7 @@ export const TRANSLATIONS = {
     footer: {
       tagline: "Automation & AI · Medellín, Colombia",
       whatsappCta: "Message me",
-      copyright: "© 2026 Jose Mejía · Semiel.IA · Built with AI.",
+      copyright: "© 2026 Jose Mejía · Semiel.IA · ",
     },
   },
 };
