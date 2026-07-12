@@ -4,55 +4,38 @@ import { Button } from "./Button";
 import { Reveal } from "./Reveal";
 import { meetingUrl } from "../data/contact";
 import { useLang } from "../i18n/LanguageContext";
-import { useScrollParallax } from "../hooks/useScrollParallax";
+import { useScrollVideo } from "../hooks/useScrollVideo";
 
 export function Hero() {
   const { t } = useLang();
   const h = t.hero;
-  const sectionRef = useScrollParallax();
+  const { sectionRef, videoRef } = useScrollVideo("/fondo.mp4");
 
   return (
     <section
       ref={sectionRef}
       id="inicio"
       className="relative overflow-hidden"
-      style={{ backgroundColor: COLORS.void, "--parallax": 0 }}
+      style={{ backgroundColor: COLORS.void }}
     >
-      {/* Sol: el wrapper centra y aplica el parallax (se hunde al bajar);
-          el div interior lleva el pulso. Separado en dos capas porque una
-          animación CSS reemplaza todo el transform del elemento que anima. */}
-      <div
-        className="absolute left-1/2"
-        style={{
-          top: "-18%",
-          width: "min(120vw, 900px)",
-          height: "min(120vw, 900px)",
-          transform: "translate3d(-50%, calc(var(--parallax, 0) * 160px), 0)",
-          opacity: "calc(1 - var(--parallax, 0) * 0.3)",
-          willChange: "transform",
-        }}
-      >
-        <div
-          className="solar-pulse w-full h-full rounded-full"
-          style={{
-            background: `radial-gradient(circle at 62% 38%, ${COLORS.solarGold} 0%, ${COLORS.emberCore} 42%, ${COLORS.emberEdge} 72%, transparent 78%)`,
-            filter: "blur(2px)",
-          }}
-        />
-      </div>
-      {/* Degradado ambiental para fundir el sol con el fondo */}
+      {/* Video de fondo: avanza con el scroll (ver useScrollVideo). El src lo
+          asigna el hook (blob); muted + playsInline permiten pintarlo sin
+          interacción del usuario en móviles. */}
+      <video
+        ref={videoRef}
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+        tabIndex={-1}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Overlay de legibilidad: velo oscuro + fundido a void por abajo para
+          empalmar con la siguiente sección */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse at 50% 0%, transparent 30%, ${COLORS.void} 68%)` }}
-      />
-      {/* Banda de resplandor del horizonte: gana intensidad al hundirse el sol */}
-      <div
-        className="absolute left-0 right-0 pointer-events-none"
         style={{
-          bottom: "22%",
-          height: "14%",
-          background: `linear-gradient(180deg, transparent 0%, ${COLORS.horizonGlow}55 45%, ${COLORS.horizonGlow}22 65%, transparent 100%)`,
-          opacity: "calc(0.6 + var(--parallax, 0) * 0.4)",
+          background: `linear-gradient(180deg, ${COLORS.void}66 0%, ${COLORS.void}4d 55%, ${COLORS.void} 98%)`,
         }}
       />
 
@@ -66,7 +49,7 @@ export function Hero() {
         </Reveal>
 
         {/* H1 */}
-        <Reveal as="h1" delay={80} className="font-display italic font-semibold text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6 max-w-3xl" style={{ color: COLORS.linen }}>
+        <Reveal as="h1" delay={80} className="font-display font-semibold text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6 max-w-3xl" style={{ color: COLORS.linen }}>
           {h.h1}
         </Reveal>
 

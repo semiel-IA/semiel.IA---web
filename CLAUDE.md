@@ -44,7 +44,7 @@ Portfolio/
 ├─ src/
 │  ├─ main.jsx              # bootstrap de React, envuelve <App/> en <LanguageProvider>
 │  ├─ App.jsx                # compone Header + Hero + ParaNegocios + About + Contact + Footer
-│  ├─ index.css              # fuentes, @tailwind directives, keyframes (solarPulse, revealUp)
+│  ├─ index.css              # @tailwind directives, clases font-display/font-body, keyframes de Reveal
 │  ├─ i18n/
 │  │  ├─ translations.js      # diccionario ES/EN — ÚNICA fuente del copy visible
 │  │  └─ LanguageContext.jsx  # LanguageProvider + hook useLang() (persiste en localStorage)
@@ -53,9 +53,11 @@ Portfolio/
 │  ├─ data/
 │  │  ├─ navLinks.js         # NAV_ITEMS: estructura (key + href); la etiqueta la da t.nav[key]
 │  │  └─ contact.js          # ÚNICA fuente de datos de contacto + helpers whatsappUrl()/meetingUrl()
+│  ├─ hooks/
+│  │  └─ useScrollVideo.js   # scrubbing: liga currentTime del video del Hero al scroll (blob + rAF)
 │  └─ components/
 │     ├─ Header.jsx          # nav fija + menú móvil + selector ES/EN (funcional) + CTA WhatsApp
-│     ├─ Hero.jsx             # sol animado, eyebrow, H1, subtítulo, 2 CTA, pie
+│     ├─ Hero.jsx             # video de fondo con scrubbing por scroll, eyebrow, H1, 2 CTA, pie
 │     ├─ ParaNegociosSection.jsx  # id=para-negocios, grid 2×2 de tarjetas + CTA de cierre
 │     ├─ AboutSection.jsx     # id=sobre-mi (copy BORRADOR, pendiente de refinar)
 │     ├─ ContactSection.jsx   # id=contacto (WhatsApp + email + LinkedIn)
@@ -65,7 +67,7 @@ Portfolio/
 │     ├─ Reveal.jsx           # fade/slide-up al hacer scroll (IntersectionObserver + CSS)
 │     ├─ NavPill.jsx
 │     └─ icons/{WhatsAppIcon,LinkedInIcon}.jsx
-├─ public/                   # estáticos servidos tal cual (favicon)
+├─ public/                   # estáticos servidos tal cual (favicon, fondo.mp4, _headers)
 └─ temaportfolio.jpg          # imagen de referencia de estética (no se sirve en la app)
 ```
 
@@ -116,18 +118,21 @@ resplandor de horizonte, textura de grano sutil.
 > que quedó implementada en la primera versión funcional y es la fuente de verdad actual.
 
 ### Tipografía
-- **Fraunces** (serif, itálica) → titulares (`font-display`).
-- **Inter** → cuerpo de texto (`font-body`).
-- Ambas se cargan vía Google Fonts en `src/index.css`.
+- **Iceberg** (display, techno) → titulares (`font-display`).
+- **Chakra Petch** → cuerpo de texto, botones y nav (`font-body`).
+- Ambas se cargan vía Google Fonts con `<link>` en `index.html` (no `@import` en CSS).
+- **Sin cursiva en ninguna parte** (decisión explícita; Iceberg además no tiene itálica).
 
 ### Escala tipográfica
-- **H1:** `text-4xl sm:text-6xl md:text-7xl`, `font-display italic font-semibold`, color `linen`.
+- **H1:** `text-4xl sm:text-5xl md:text-6xl`, `font-display font-semibold`, color `linen`.
 - H2/H3: derivados proporcionalmente, mismo `font-display`.
 
 ### Otros
 - Diseño **responsive**, móvil primero (breakpoints de Tailwind: `sm`, `md`, `lg`).
 - Accesible: HTML semántico, `alt` en imágenes, `aria-label` en controles icon-only, buen contraste.
-- Animaciones sutiles (`solar-pulse`) respetan `prefers-reduced-motion`.
+- Animaciones (reveals y el scrubbing del video del Hero) respetan `prefers-reduced-motion`.
+- El fondo del Hero es `public/fondo.mp4` con avance ligado al scroll (`useScrollVideo`);
+  la CSP permite `media-src 'self' blob:` para servirlo desde un object URL.
 
 ---
 

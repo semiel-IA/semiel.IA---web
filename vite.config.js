@@ -10,6 +10,8 @@ const CSP =
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
   "font-src 'self' https://fonts.gstatic.com; " +
   "img-src 'self' data:; " +
+  // blob: para el video del Hero (useScrollVideo lo sirve desde un object URL)
+  "media-src 'self' blob:; " +
   "connect-src 'self'; " +
   "object-src 'none'; " +
   "base-uri 'self'; " +

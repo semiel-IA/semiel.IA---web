@@ -26,7 +26,7 @@ function ServiceCard({ emoji, title, description, bullets, delay }) {
           <span aria-hidden="true">{emoji}</span>
         </div>
 
-        <h3 className="font-display italic font-semibold text-xl sm:text-2xl mb-3" style={{ color: COLORS.linen }}>
+        <h3 className="font-display font-semibold text-xl sm:text-2xl mb-3" style={{ color: COLORS.linen }}>
           {title}
         </h3>
         <p className="font-body text-sm mb-6" style={{ color: COLORS.linenDim }}>
@@ -63,7 +63,7 @@ export function ParaNegociosSection() {
           >
             {p.eyebrow}
           </Reveal>
-          <Reveal as="h2" variant="blur" delay={80} className="font-display italic font-semibold text-3xl sm:text-4xl md:text-5xl mb-5" style={{ color: COLORS.linen }}>
+          <Reveal as="h2" variant="blur" delay={80} className="font-display font-semibold text-3xl sm:text-4xl md:text-5xl mb-5" style={{ color: COLORS.linen }}>
             {p.h2}
           </Reveal>
           <Reveal delay={160} as="p" className="font-body text-sm sm:text-base" style={{ color: COLORS.linenDim }}>
@@ -106,7 +106,7 @@ export function ParaNegociosSection() {
             className="rounded-3xl p-8 flex flex-col items-center text-center"
             style={{ backgroundColor: COLORS.cardBg, border: `1px solid ${COLORS.border}` }}
           >
-            <h3 className="font-display italic font-semibold text-xl sm:text-2xl mb-3" style={{ color: COLORS.linen }}>
+            <h3 className="font-display font-semibold text-xl sm:text-2xl mb-3" style={{ color: COLORS.linen }}>
               {p.meetingTitle}
             </h3>
             <p className="font-body text-base sm:text-lg mb-6 flex-1" style={{ color: COLORS.linenDim }}>

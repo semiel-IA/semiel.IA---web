@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="relative z-10" style={{ borderTop: `1px solid ${COLORS.border}`, backgroundColor: COLORS.void }}>
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex flex-col items-center md:items-start gap-1">
-          <span className="font-display italic font-semibold text-lg" style={{ color: COLORS.linen }}>
+          <span className="font-display font-semibold text-lg" style={{ color: COLORS.linen }}>
             Jose Mej<span style={{ color: COLORS.emberCore }}>IA</span>
             <span style={{ color: COLORS.dust }}> ~ </span>
             Semiel<span style={{ color: COLORS.emberCore }}>.IA</span>

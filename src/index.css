@@ -1,27 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600;1,9..144,700&family=Inter:wght@400;500;600&display=swap');
+/* Las fuentes (Iceberg + Chakra Petch) se cargan en index.html vía <link>. */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .font-display {
-  font-family: 'Fraunces', serif;
+  font-family: 'Iceberg', 'Chakra Petch', sans-serif;
 }
 
 .font-body {
-  font-family: 'Inter', sans-serif;
-}
-
-/* Pulso + deriva lenta del sol. Anima el div interior del sol (sin transform
-   estático propio), así no pisa el translate del wrapper que lo centra. */
-@keyframes solarPulse {
-  0%, 100% { opacity: 0.85; transform: scale(1) translate(0, 0); }
-  33%      { opacity: 1;    transform: scale(1.02) translate(1.5%, 0.8%); }
-  66%      { opacity: 0.9;  transform: scale(1.01) translate(-1.2%, -0.5%); }
-}
-
-.solar-pulse {
-  animation: solarPulse 14s ease-in-out infinite;
+  font-family: 'Chakra Petch', sans-serif;
 }
 
 /* Revelado sutil al hacer scroll (ver componente Reveal.jsx).
@@ -65,7 +53,6 @@
 .reveal.reveal-blur.is-visible  { animation-name: revealBlur; animation-duration: 0.9s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .solar-pulse { animation: none; }
   .reveal,
   .reveal.is-visible {
     opacity: 1;

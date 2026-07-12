@@ -30,7 +30,7 @@ export function AboutSection() {
           <Reveal className="inline-block font-body text-xs uppercase tracking-[0.22em] mb-4" style={{ color: COLORS.emberCore }}>
             {a.eyebrow}
           </Reveal>
-          <Reveal as="h2" variant="blur" delay={80} className="font-display italic font-semibold text-3xl sm:text-4xl mb-6" style={{ color: COLORS.linen }}>
+          <Reveal as="h2" variant="blur" delay={80} className="font-display font-semibold text-3xl sm:text-4xl mb-6" style={{ color: COLORS.linen }}>
             {a.h2}
           </Reveal>
 
@@ -43,7 +43,7 @@ export function AboutSection() {
           {/* Frase de cierre destacada */}
           <Reveal variant="left" delay={240} className="mt-10">
             <blockquote
-              className="font-display italic text-xl sm:text-2xl leading-snug max-w-2xl pl-5 text-left"
+              className="font-display text-xl sm:text-2xl leading-snug max-w-2xl pl-5 text-left"
               style={{ color: COLORS.linen, borderLeft: `3px solid ${COLORS.emberCore}` }}
             >
               {a.quote}

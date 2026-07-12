@@ -32,20 +32,23 @@ const browser = await chromium.launch({
 
 ## Flujos que vale la pena manejar
 
-- **Hero / sol:** el parallax escribe la variable CSS `--parallax` (0→1) como
-  estilo inline de `section#inicio` (la setea `useScrollParallax`). Tras
-  `window.scrollTo(0, 600)` debe crecer; el wrapper del sol
-  (`#inicio > div:nth-child(1)`) debe seguir centrado (centro del rect ≈ centro
-  del viewport) y con translateY > 0.
+- **Hero / video:** `useScrollVideo` liga `video.currentTime` de
+  `#inicio video` al progreso de scroll (0 arriba del todo → duración completa
+  cuando el Hero sale del viewport). El hook asigna el `src` como blob tras un
+  fetch: esperar a que `video.duration > 0` antes de medir. Tras scrollear
+  (pasos graduales + ~400 ms para que el lerp converja) `currentTime` debe
+  crecer; al volver arriba debe acercarse a 0. Las fuentes computadas deben ser
+  Iceberg (h1/h2) y Chakra Petch (body), y ningún elemento con
+  `font-style: italic`.
 - **Reveals:** los elementos `.reveal` ganan `.is-visible` al entrar en viewport
   (una sola vez). OJO: con `scrollIntoView`/saltos instantáneos los elementos
   por los que "saltas" no se revelan (el observer nunca los ve intersectar) —
   para verificar el flujo real usa scroll gradual en pasos de ~300 px y al final
   comprueba que no queda ningún `.reveal:not(.is-visible)`.
-- **Reduced motion:** contexto con `reducedMotion: "reduce"` → `--parallax` no
-  cambia al hacer scroll, `animation-name` de `.solar-pulse` es `none`, y los
-  `.reveal` tienen `opacity: 1` de inmediato.
-- **Móvil:** viewport 375×700; el sol debe seguir centrado.
+- **Reduced motion:** contexto con `reducedMotion: "reduce"` → `currentTime`
+  del video del Hero se queda en 0 al scrollear, y los `.reveal` tienen
+  `opacity: 1` de inmediato.
+- **Móvil:** viewport 375×700; el video debe cubrir el Hero (object-cover).
 - Capturar `console.error` y `pageerror` durante todo el recorrido.
 
 ## Gotchas

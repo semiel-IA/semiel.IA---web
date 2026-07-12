@@ -10,7 +10,7 @@ import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 // Marca: "Jose MejIA ~ Semiel.IA" — se resalta "IA" en ambos nombres.
 function Brand() {
   return (
-    <a href="#" className="font-display italic font-semibold text-lg md:text-xl shrink-0" style={{ color: COLORS.linen }}>
+    <a href="#" className="font-display font-semibold text-lg md:text-xl shrink-0" style={{ color: COLORS.linen }}>
       Jose Mej<span style={{ color: COLORS.emberCore }}>IA</span>
       <span style={{ color: COLORS.dust }}> ~ </span>
       Semiel<span style={{ color: COLORS.emberCore }}>.IA</span>
