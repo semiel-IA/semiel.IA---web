@@ -4,36 +4,55 @@ import { Button } from "./Button";
 import { Reveal } from "./Reveal";
 import { meetingUrl } from "../data/contact";
 import { useLang } from "../i18n/LanguageContext";
+import { useScrollParallax } from "../hooks/useScrollParallax";
 
 export function Hero() {
   const { t } = useLang();
   const h = t.hero;
+  const sectionRef = useScrollParallax();
 
   return (
-    <section id="inicio" className="relative overflow-hidden" style={{ backgroundColor: COLORS.void }}>
-      {/* Sol */}
+    <section
+      ref={sectionRef}
+      id="inicio"
+      className="relative overflow-hidden"
+      style={{ backgroundColor: COLORS.void, "--parallax": 0 }}
+    >
+      {/* Sol: el wrapper centra y aplica el parallax (se hunde al bajar);
+          el div interior lleva el pulso. Separado en dos capas porque una
+          animación CSS reemplaza todo el transform del elemento que anima. */}
       <div
-        className="solar-pulse absolute left-1/2 -translate-x-1/2 rounded-full"
+        className="absolute left-1/2"
         style={{
           top: "-18%",
           width: "min(120vw, 900px)",
           height: "min(120vw, 900px)",
-          background: `radial-gradient(circle at 62% 38%, ${COLORS.solarGold} 0%, ${COLORS.emberCore} 42%, ${COLORS.emberEdge} 72%, transparent 78%)`,
-          filter: "blur(2px)",
+          transform: "translate3d(-50%, calc(var(--parallax, 0) * 160px), 0)",
+          opacity: "calc(1 - var(--parallax, 0) * 0.3)",
+          willChange: "transform",
         }}
-      />
+      >
+        <div
+          className="solar-pulse w-full h-full rounded-full"
+          style={{
+            background: `radial-gradient(circle at 62% 38%, ${COLORS.solarGold} 0%, ${COLORS.emberCore} 42%, ${COLORS.emberEdge} 72%, transparent 78%)`,
+            filter: "blur(2px)",
+          }}
+        />
+      </div>
       {/* Degradado ambiental para fundir el sol con el fondo */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: `radial-gradient(ellipse at 50% 0%, transparent 30%, ${COLORS.void} 68%)` }}
       />
-      {/* Banda de resplandor del horizonte */}
+      {/* Banda de resplandor del horizonte: gana intensidad al hundirse el sol */}
       <div
         className="absolute left-0 right-0 pointer-events-none"
         style={{
           bottom: "22%",
           height: "14%",
           background: `linear-gradient(180deg, transparent 0%, ${COLORS.horizonGlow}55 45%, ${COLORS.horizonGlow}22 65%, transparent 100%)`,
+          opacity: "calc(0.6 + var(--parallax, 0) * 0.4)",
         }}
       />
 
