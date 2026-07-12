@@ -16,6 +16,7 @@ dist-ssr
 .env
 .env.*
 !.env.example
+.claude/settings.local.json
 
 # Original de la foto de perfil (ya optimizada en src/assets/jose-mejia.webp)
 /perfil.jpeg
