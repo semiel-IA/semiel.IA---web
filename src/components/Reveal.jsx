@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-// Envuelve contenido para revelarlo con un fade/slide-up sutil al entrar en viewport.
+// Envuelve contenido para revelarlo al entrar en viewport (una sola vez).
 // Usa IntersectionObserver + CSS (ver .reveal en index.css). Sin dependencias externas.
-export function Reveal({ children, delay = 0, as: Tag = "div", className = "", style, ...rest }) {
+// variant: "up" (default) | "left" | "right" | "scale" | "blur"
+export function Reveal({ children, delay = 0, variant = "up", as: Tag = "div", className = "", style, ...rest }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -24,10 +25,12 @@ export function Reveal({ children, delay = 0, as: Tag = "div", className = "", s
     return () => observer.disconnect();
   }, []);
 
+  const variantClass = variant === "up" ? "" : `reveal-${variant}`;
+
   return (
     <Tag
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={`reveal ${variantClass} ${visible ? "is-visible" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms`, animationDelay: `${delay}ms`, ...style }}
       {...rest}
     >
