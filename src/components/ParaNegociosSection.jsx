@@ -7,7 +7,7 @@ import { WhatsAppIcon } from "./icons/WhatsAppIcon";
 
 function ServiceCard({ emoji, title, description, bullets, delay }) {
   return (
-    <Reveal delay={delay}>
+    <Reveal delay={delay} variant="scale" className="h-full">
       <div
         className="group h-full rounded-3xl p-8 transition-all duration-300"
         style={{ backgroundColor: COLORS.cardBg, border: `1px solid ${COLORS.border}` }}
@@ -63,7 +63,7 @@ export function ParaNegociosSection() {
           >
             {p.eyebrow}
           </Reveal>
-          <Reveal as="h2" delay={80} className="font-display italic font-semibold text-3xl sm:text-4xl md:text-5xl mb-5" style={{ color: COLORS.linen }}>
+          <Reveal as="h2" variant="blur" delay={80} className="font-display italic font-semibold text-3xl sm:text-4xl md:text-5xl mb-5" style={{ color: COLORS.linen }}>
             {p.h2}
           </Reveal>
           <Reveal delay={160} as="p" className="font-body text-sm sm:text-base" style={{ color: COLORS.linenDim }}>
@@ -74,12 +74,12 @@ export function ParaNegociosSection() {
         {/* Grid de tarjetas: 2×2 en desktop, 1 columna en móvil */}
         <div className="grid gap-6 md:grid-cols-2">
           {p.cards.map((card, i) => (
-            <ServiceCard key={card.title} {...card} delay={i * 90} />
+            <ServiceCard key={card.title} {...card} delay={i * 110} />
           ))}
         </div>
 
         {/* Cierre: dos CTA lado a lado (WhatsApp · agendar reunión) */}
-        <Reveal delay={120} className="mt-16 grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+        <Reveal delay={120} variant="scale" className="mt-16 grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
           {/* Izquierda: ¿algo que no está en la lista? → WhatsApp */}
           <div
             className="rounded-3xl p-8 flex flex-col items-center text-center"

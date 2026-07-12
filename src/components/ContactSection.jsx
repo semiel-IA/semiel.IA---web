@@ -36,14 +36,14 @@ export function ContactSection() {
         <Reveal className="inline-block font-body text-xs uppercase tracking-[0.22em] mb-4" style={{ color: COLORS.emberCore }}>
           {c.eyebrow}
         </Reveal>
-        <Reveal as="h2" delay={80} className="font-display italic font-semibold text-3xl sm:text-4xl mb-5" style={{ color: COLORS.linen }}>
+        <Reveal as="h2" variant="blur" delay={80} className="font-display italic font-semibold text-3xl sm:text-4xl mb-5" style={{ color: COLORS.linen }}>
           {c.h2}
         </Reveal>
         <Reveal delay={160} as="p" className="font-body text-base sm:text-lg mb-10" style={{ color: COLORS.linenDim }}>
           {c.intro}
         </Reveal>
 
-        <Reveal delay={240} className="flex flex-col sm:flex-row items-center gap-3">
+        <Reveal delay={240} variant="scale" className="flex flex-col sm:flex-row items-center gap-3">
           <Button
             href={whatsappUrl(t.whatsapp.default)}
             variant="whatsapp"
